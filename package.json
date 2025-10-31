@@ -1,0 +1,17 @@
+{
+  "name": "un533n",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "frontend",
+    "backend"
+  ],
+  "scripts": {
+    "dev": "concurrently \"npm run dev --workspace=frontend\" \"npm run dev --workspace=backend\"",
+    "build": "npm run build --workspaces",
+    "start": "concurrently \"npm run start --workspace=frontend\" \"npm run start --workspace=backend\""
+  },
+  "devDependencies": {
+    "concurrently": "^8.0.0"
+  }
+}
