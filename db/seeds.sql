@@ -4,19 +4,27 @@ INSERT INTO categories (name, slug) VALUES
 ('Bottoms', 'bottoms'),
 ('Accessories', 'accessories');
 
+DELETE FROM product_images;
+DELETE FROM reviews;
+DELETE FROM products;
+
 INSERT INTO products (sku, title, slug, description, price, currency, inventory_count, category_id) VALUES
-('UN-001', 'SQUARE TEE', 'square-tee', 'Minimalist box cut tee in heavyweight cotton.', 45.00, 'USD', 100, 1),
-('UN-002', 'CARGO PANT', 'cargo-pant', 'Relaxed fit cargo pants with utility pockets.', 85.00, 'USD', 50, 2),
-('UN-003', 'MESH CAP', 'mesh-cap', 'Breathable mesh cap with tonal embroidery.', 35.00, 'USD', 75, 3),
-('UN-004', 'OVERSIZED HOODIE', 'oversized-hoodie', 'Dropped shoulder hoodie in brushed fleece.', 95.00, 'USD', 60, 1);
+('UN-100', 'MESH CAP', 'cap', 'Breathable mesh cap with tonal embroidery.', 35.00, 'USD', 100, 3),
+('UN-200', 'LOUNGE SWEATS', 'sweats', 'Relaxed fit heavyweight sweats with minimal branding.', 65.00, 'USD', 100, 2),
+('UN-300', 'ARMLESS TANK', 'armless', 'Sleeveless tank with clean neckline and premium cotton.', 30.00, 'USD', 100, 1),
+('UN-400B', 'ESSENTIAL TEE — BLACK', 'tee-black', 'Essential black tee in heavyweight jersey.', 40.00, 'USD', 100, 1),
+('UN-400W', 'ESSENTIAL TEE — WHITE', 'tee-white', 'Essential white tee in heavyweight jersey.', 40.00, 'USD', 100, 1),
+('UN-500', 'CROP TOP', 'crop-top', 'Cropped top with tight rib and clean finish.', 32.00, 'USD', 100, 1);
 
 INSERT INTO product_images (product_id, url, alt, sort_order) VALUES
-(1, 'https://example.com/images/square-tee-1.jpg', 'Square Tee Front', 1),
-(1, 'https://example.com/images/square-tee-2.jpg', 'Square Tee Back', 2),
-(2, 'https://example.com/images/cargo-pant-1.jpg', 'Cargo Pant Front', 1),
-(2, 'https://example.com/images/cargo-pant-2.jpg', 'Cargo Pant Detail', 2);
+(1, '/images/products/triangle-cap.jpg', 'Cap', 1),
+(2, '/images/products/gray-hoodie.jpg', 'Sweats', 1),
+(3, '/images/products/white-hoodie.jpg', 'Armless', 1),
+(4, '/images/products/black-tee.jpg', 'Tee Black', 1),
+(5, '/images/products/white-tee.jpg', 'Tee White', 1),
+(6, '/images/products/circle-hoodie.jpg', 'Crop Top', 1);
 
 -- Sample reviews
 INSERT INTO reviews (product_id, rating, title, body, created_at) VALUES
-(1, 5, 'Perfect fit', 'Great quality and exactly as described.', NOW()),
-(2, 4, 'Nice pants', 'Good material but runs slightly large.', NOW());
+(4, 5, 'Perfect tee', 'Thick fabric, sharp fit. Love the black.', NOW()),
+(5, 5, 'Clean white', 'Crisp white and not see-through.', NOW());

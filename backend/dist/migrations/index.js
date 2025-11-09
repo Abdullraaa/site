@@ -2,9 +2,11 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.sql = sql;
 exports.runMigrations = runMigrations;
+require("dotenv/config");
 const db_1 = require("../db");
 const _001_create_orders_1 = require("./001_create_orders");
 const _002_create_products_and_reviews_1 = require("./002_create_products_and_reviews");
+const _003_update_products_five_items_1 = require("./003_update_products_five_items");
 /**
  * Template tag function for running SQL queries
  */
@@ -36,7 +38,8 @@ async function runMigrations() {
     // Get all migration files
     const migrations = [
         { name: '001_create_orders', up: _001_create_orders_1.up },
-        { name: '002_create_products_and_reviews', up: _002_create_products_and_reviews_1.up }
+        { name: '002_create_products_and_reviews', up: _002_create_products_and_reviews_1.up },
+        { name: '003_update_products_five_items', up: _003_update_products_five_items_1.up }
     ];
     // Run pending migrations
     for (const migration of migrations) {

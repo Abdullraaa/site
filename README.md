@@ -162,23 +162,35 @@ A MySQL database will be used to store data for users, products, orders, and rev
 - **Schema Markup:** Use JSON-LD for product and review schema.
 - **Analytics:** Integrate Google Analytics.
 
-## 8. Deployment Steps
+## 8. Deployment Steps (Hostinger)
 
 1.  **Hostinger Setup:**
     - Sign up for a Hostinger plan that supports Node.js and MySQL.
     - Create a MySQL database and note the credentials.
-2.  **Backend Deployment:**
-    - Set up environment variables for the database connection and any API keys.
-    - Install dependencies with `npm install`.
-    - Start the server with `npm start`.
-3.  **Frontend Deployment:**
-    - Set the `API_URL` environment variable to the backend URL.
-    - Deploy to Vercel for seamless Next.js hosting, or configure Hostinger for a Node.js application.
+2.  **Environment Variables:**
+    - Copy `.env.template` to `.env` and fill values:
+      - `DB_HOST`, `DB_USER`, `DB_PASSWORD`, `DB_NAME`, `PORT`, `WHATSAPP_NUMBER`.
+3.  **Backend Deployment:**
+    - `cd backend && npm ci && npm run build`
+    - Run migrations: `npm run migrate`
+    - Start server: `npm start` (ensure port `4000` open on Hostinger)
+4.  **Frontend Deployment:**
+    - `cd frontend && npm ci && npm run build`
+    - Serve with Node: `npm start` or deploy statically behind Node adapter.
+    - Set `NEXT_PUBLIC_API_BASE` if using a custom API URL.
 4.  **Domain & DNS:**
     - Point your domain to the front-end deployment.
     - Configure a subdomain for the backend API if needed.
 
-## 9. Optional Enhancements
+## 9. CI/CD
+
+GitHub Actions workflow at `.github/workflows/ci.yml`:
+- Installs dependencies (backend, frontend)
+- Starts MySQL service, runs migrations
+- Executes backend smoke tests
+- Builds frontend
+
+## 10. Optional Enhancements
 
 - **CI/CD Pipeline:** Use GitHub Actions to automate testing and deployment.
 - **Internationalization:** Add support for multiple languages and currencies.
