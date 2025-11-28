@@ -3,6 +3,7 @@ import express from 'express'
 import helmet from 'helmet'
 import cors from 'cors'
 import { json } from 'body-parser'
+import os from 'os'
 import ordersRouter from './routes/orders'
 import reviewsRouter from './routes/reviews'
 import { pool } from './db'
@@ -20,14 +21,45 @@ const isDevelopment = process.env.NODE_ENV !== 'production'
 // Security & Logging Middleware
 app.use(helmet())
 
-// CORS Configuration - Production ready
+// CORS Configuration - Production ready + dynamic LAN IP support in development.
+// In development we enumerate local network interface IPv4 addresses and add common frontend ports
+// so the site can be accessed from other devices on the LAN (e.g., phone or tablet).
+let dynamicLanOrigins: string[] = []
+if (isDevelopment) {
+  try {
+    const nets = os.networkInterfaces()
+    for (const name of Object.keys(nets)) {
+      for (const net of nets[name] || []) {
+        const info = net as os.NetworkInterfaceInfo
+        const family = info.family
+        if (family === 'IPv4' && !info.internal && info.address) {
+          // Add typical frontend dev ports
+          dynamicLanOrigins.push(`http://${info.address}:3000`)
+          dynamicLanOrigins.push(`http://${info.address}:3001`)
+          dynamicLanOrigins.push(`http://${info.address}:3005`)
+        }
+      }
+    }
+  } catch (e) {
+    console.warn('Failed to enumerate network interfaces for LAN CORS:', e)
+  }
+  // Allow manual override / additions via DEV_LAN_ORIGINS env (comma separated)
+  if (process.env.DEV_LAN_ORIGINS) {
+    dynamicLanOrigins.push(...process.env.DEV_LAN_ORIGINS.split(',').map(s => s.trim()).filter(Boolean))
+  }
+}
+
+// Remove potential duplicates
+dynamicLanOrigins = Array.from(new Set(dynamicLanOrigins))
+
 const allowedOrigins = isDevelopment 
   ? [
       'http://localhost:3000',
       'http://localhost:3001',
       'http://localhost:3005',
       'https://un533nstu.shop',
-      'https://www.un533nstu.shop'
+      'https://www.un533nstu.shop',
+      ...dynamicLanOrigins
     ]
   : [
       'https://un533nstu.shop',
@@ -218,8 +250,11 @@ app.use(notFoundHandler)
 // Error handler - must be last
 app.use(errorHandler)
 
-app.listen(PORT, () => {
-  console.log(`🚀 Server running on port ${PORT}`)
+app.listen(Number(PORT), '0.0.0.0', () => {
+  console.log(`🚀 Server running on port ${PORT} (bound to 0.0.0.0)`) // ensure external accessibility
   console.log(`📊 Environment: ${process.env.NODE_ENV || 'development'}`)
+  if (isDevelopment) {
+    console.log(`🌐 Detected LAN origins: ${dynamicLanOrigins.length ? dynamicLanOrigins.join(', ') : 'none'}`)
+  }
   console.log(`🔒 CORS allowed origins: ${allowedOrigins.join(', ')}`)
 })

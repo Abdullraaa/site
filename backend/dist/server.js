@@ -8,6 +8,7 @@ const express_1 = __importDefault(require("express"));
 const helmet_1 = __importDefault(require("helmet"));
 const cors_1 = __importDefault(require("cors"));
 const body_parser_1 = require("body-parser");
+const os_1 = __importDefault(require("os"));
 const orders_1 = __importDefault(require("./routes/orders"));
 const reviews_1 = __importDefault(require("./routes/reviews"));
 const db_1 = require("./db");
@@ -18,17 +19,47 @@ const errorHandler_1 = require("./middleware/errorHandler");
 const logger_1 = require("./middleware/logger");
 const app = (0, express_1.default)();
 const PORT = process.env.PORT || 4000;
-const isDevelopment = process.env.NODE_ENV === 'development';
+const isDevelopment = process.env.NODE_ENV !== 'production';
 // Security & Logging Middleware
 app.use((0, helmet_1.default)());
-// CORS Configuration - Production ready
+// CORS Configuration - Production ready + dynamic LAN IP support in development.
+// In development we enumerate local network interface IPv4 addresses and add common frontend ports
+// so the site can be accessed from other devices on the LAN (e.g., phone or tablet).
+let dynamicLanOrigins = [];
+if (isDevelopment) {
+    try {
+        const nets = os_1.default.networkInterfaces();
+        for (const name of Object.keys(nets)) {
+            for (const net of nets[name] || []) {
+                const info = net;
+                const family = info.family;
+                if (family === 'IPv4' && !info.internal && info.address) {
+                    // Add typical frontend dev ports
+                    dynamicLanOrigins.push(`http://${info.address}:3000`);
+                    dynamicLanOrigins.push(`http://${info.address}:3001`);
+                    dynamicLanOrigins.push(`http://${info.address}:3005`);
+                }
+            }
+        }
+    }
+    catch (e) {
+        console.warn('Failed to enumerate network interfaces for LAN CORS:', e);
+    }
+    // Allow manual override / additions via DEV_LAN_ORIGINS env (comma separated)
+    if (process.env.DEV_LAN_ORIGINS) {
+        dynamicLanOrigins.push(...process.env.DEV_LAN_ORIGINS.split(',').map(s => s.trim()).filter(Boolean));
+    }
+}
+// Remove potential duplicates
+dynamicLanOrigins = Array.from(new Set(dynamicLanOrigins));
 const allowedOrigins = isDevelopment
     ? [
         'http://localhost:3000',
         'http://localhost:3001',
         'http://localhost:3005',
         'https://un533nstu.shop',
-        'https://www.un533nstu.shop'
+        'https://www.un533nstu.shop',
+        ...dynamicLanOrigins
     ]
     : [
         'https://un533nstu.shop',
@@ -190,8 +221,11 @@ app.use('/api/reviews', reviews_1.default);
 app.use(errorHandler_1.notFoundHandler);
 // Error handler - must be last
 app.use(errorHandler_1.errorHandler);
-app.listen(PORT, () => {
-    console.log(`🚀 Server running on port ${PORT}`);
+app.listen(Number(PORT), '0.0.0.0', () => {
+    console.log(`🚀 Server running on port ${PORT} (bound to 0.0.0.0)`); // ensure external accessibility
     console.log(`📊 Environment: ${process.env.NODE_ENV || 'development'}`);
+    if (isDevelopment) {
+        console.log(`🌐 Detected LAN origins: ${dynamicLanOrigins.length ? dynamicLanOrigins.join(', ') : 'none'}`);
+    }
     console.log(`🔒 CORS allowed origins: ${allowedOrigins.join(', ')}`);
 });

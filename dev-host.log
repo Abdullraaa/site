@@ -1,0 +1,139 @@
+
+> un533n@1.0.0 dev:host
+> concurrently "npm run dev:host --workspace=frontend" "npm run dev --workspace=backend"
+
+[1] 
+[1] > un533n-backend@0.1.0 dev
+[1] > ts-node-dev src/server.ts
+[1] 
+[0] 
+[0] > frontend@0.1.0 dev:host
+[0] > next dev --hostname 0.0.0.0
+[0] 
+[1] [INFO] 16:45:05 ts-node-dev ver. 2.0.0 (using ts-node ver. 10.9.2, typescript ver. 5.9.3)
+[0]   ▲ Next.js 14.2.15
+[0]   - Local:        http://localhost:3000
+[0]   - Network:      http://0.0.0.0:3000
+[0] 
+[0]  ✓ Starting...
+[1] 🚀 Server running on port 4000 (bound to 0.0.0.0)
+[1] 📊 Environment: development
+[1] 🌐 Detected LAN origins: http://172.20.10.3:3000, http://172.20.10.3:3001, http://172.20.10.3:3005
+[1] 🔒 CORS allowed origins: http://localhost:3000, http://localhost:3001, http://localhost:3005, https://un533nstu.shop, https://www.un533nstu.shop, http://172.20.10.3:3000, http://172.20.10.3:3001, http://172.20.10.3:3005
+[0]  ✓ Ready in 3.1s
+[1] 172.20.10.3 - - [27/Nov/2025:15:45:45 +0000] "GET /api/health HTTP/1.1" 200 69 "-" "curl/8.17.0"
+[0]  ○ Compiling / ...
+[0]  ✓ Compiled / in 3.4s (1383 modules)
+[1] 127.0.0.1 - - [27/Nov/2025:15:46:30 +0000] "GET /api/products HTTP/1.1" 200 1664 "-" "node"
+[0]  GET / 200 in 3729ms
+[0]  ○ Compiling /_not-found ...
+[0]  ✓ Compiled /_not-found in 1706ms (1417 modules)
+[0]  GET /favicon.ico 200 in 2248ms
+[0]  GET /api/reviews 404 in 2243ms
+[1] 127.0.0.1 - - [27/Nov/2025:15:46:34 +0000] "GET /api/products HTTP/1.1" 200 1664 "-" "node"
+[0]  GET /api/reviews 404 in 104ms
+[0]  ✓ Compiled in 513ms (1383 modules)
+[1] 127.0.0.1 - - [27/Nov/2025:15:48:30 +0000] "GET /api/products HTTP/1.1" 200 1664 "-" "node"
+[0]  ✓ Compiled in 1255ms (1383 modules)
+[1] 127.0.0.1 - - [27/Nov/2025:15:51:44 +0000] "GET /api/products HTTP/1.1" 200 1664 "-" "node"
+[0]  ✓ Compiled /_not-found in 317ms (1372 modules)
+[0]  GET /fonts/Technocra-Bold.woff2 404 in 444ms
+[1] 127.0.0.1 - - [27/Nov/2025:15:53:53 +0000] "GET /api/products HTTP/1.1" 200 1664 "-" "node"
+[0]  GET /fonts/Technocra-Bold.woff 404 in 17ms
+[0]  GET /fonts/Technocra-Bold.woff2 404 in 17ms
+[0]  GET /fonts/Technocra-Bold.woff 404 in 19ms
+[0]  GET /.well-known/appspecific/com.chrome.devtools.json 404 in 19ms
+[0]  ✓ Compiled /cart in 468ms (1375 modules)
+[0]  ✓ Compiled /_not-found in 254ms (1378 modules)
+[0]  GET /api/reviews 404 in 349ms
+[0]  GET /api/reviews 404 in 16ms
+[0]  GET /api/reviews 404 in 28ms
+[0]  GET /api/reviews 404 in 16ms
+[1] 127.0.0.1 - - [27/Nov/2025:16:37:04 +0000] "GET /api/products HTTP/1.1" 200 1664 "-" "node"
+[0]  GET / 200 in 181ms
+[0]  GET /fonts/Technocra-Bold.woff 404 in 74ms
+[0]  ○ Compiling /favicon.ico ...
+[0]  ✓ Compiled /favicon.ico in 1819ms (1409 modules)
+[0]  GET /favicon.ico 200 in 2153ms
+[0]  GET /api/reviews 404 in 2143ms
+[0]  GET /api/reviews 404 in 37ms
+[1] 127.0.0.1 - - [27/Nov/2025:16:40:37 +0000] "GET /api/products HTTP/1.1" 200 1664 "-" "node"
+[0]  GET / 200 in 136ms
+[0]  GET /fonts/Technocra-Bold.woff 404 in 76ms
+[1] 127.0.0.1 - - [27/Nov/2025:16:40:38 +0000] "GET /api/products HTTP/1.1" 200 1664 "-" "node"
+[0]  GET / 200 in 62ms
+[0]  GET /fonts/Technocra-Bold.woff 404 in 75ms
+[0]  GET /api/reviews 404 in 51ms
+[0]  GET /api/reviews 404 in 44ms
+[0]  GET /favicon.ico 200 in 30ms
+[1] 127.0.0.1 - - [27/Nov/2025:16:40:42 +0000] "GET /api/products HTTP/1.1" 200 1664 "-" "node"
+[0]  GET / 200 in 76ms
+[0]  GET /fonts/Technocra-Bold.woff 404 in 44ms
+[0]  GET /favicon.ico 200 in 17ms
+[0]  GET /api/reviews 404 in 36ms
+[0]  GET /api/reviews 404 in 20ms
+[0]  ✓ Compiled in 1892ms (1389 modules)
+[1] 127.0.0.1 - - [27/Nov/2025:16:42:15 +0000] "GET /api/products HTTP/1.1" 200 1664 "-" "node"
+[0]  ✓ Compiled /_not-found in 249ms (1378 modules)
+[0]  GET /fonts/Technocra-Bold.woff 404 in 324ms
+[1] 127.0.0.1 - - [27/Nov/2025:16:42:22 +0000] "GET /api/products HTTP/1.1" 200 1664 "-" "node"
+[0]  GET / 200 in 160ms
+[0]  GET /fonts/Technocra-Bold.woff 404 in 103ms
+[0]  GET /api/reviews 404 in 39ms
+[0]  GET /api/reviews 404 in 38ms
+[0]  ✓ Compiled /favicon.ico in 174ms (736 modules)
+[0]  GET /favicon.ico 200 in 302ms
+[1] 127.0.0.1 - - [27/Nov/2025:16:42:27 +0000] "GET /api/products HTTP/1.1" 200 1664 "-" "node"
+[0]  GET / 200 in 315ms
+[0]  GET /fonts/Technocra-Bold.woff 404 in 44ms
+[0]  GET /favicon.ico 200 in 136ms
+[0]  GET /api/reviews 404 in 27ms
+[0]  GET /api/reviews 404 in 18ms
+[1] 127.0.0.1 - - [27/Nov/2025:16:43:53 +0000] "GET /api/products HTTP/1.1" 200 1664 "-" "node"
+[0]  GET / 200 in 59ms
+[0]  ✓ Compiled in 1879ms (1389 modules)
+[1] 127.0.0.1 - - [28/Nov/2025:07:56:40 +0000] "GET /api/products HTTP/1.1" 200 1664 "-" "node"
+[0]  GET / 200 in 280ms
+[0]  ✓ Compiled /_not-found in 246ms (1378 modules)
+[0]  GET /fonts/Technocra-Bold.woff 404 in 302ms
+[0]  GET /api/reviews 404 in 57ms
+[0]  GET /api/reviews 404 in 18ms
+[1] 127.0.0.1 - - [28/Nov/2025:07:57:15 +0000] "GET /api/products HTTP/1.1" 200 1664 "-" "node"
+[0]  GET / 200 in 61ms
+[0]  GET /fonts/Technocra-Bold.woff 404 in 38ms
+[0]  ✓ Compiled /favicon.ico in 488ms (1409 modules)
+[0]  GET /favicon.ico 200 in 810ms
+[1] 127.0.0.1 - - [28/Nov/2025:07:57:16 +0000] "GET /api/products HTTP/1.1" 200 1664 "-" "node"
+[0]  GET / 200 in 673ms
+[0]  GET /api/reviews 404 in 861ms
+[1] 127.0.0.1 - - [28/Nov/2025:07:57:17 +0000] "GET /api/products HTTP/1.1" 200 1664 "-" "node"
+[0]  GET /api/reviews 404 in 55ms
+[0]  GET / 200 in 59ms
+[0]  GET /fonts/Technocra-Bold.woff 404 in 60ms
+[0]  GET /favicon.ico 200 in 60ms
+[0]  GET /api/reviews 404 in 71ms
+[0]  GET /api/reviews 404 in 18ms
+[1] 127.0.0.1 - - [28/Nov/2025:08:22:27 +0000] "GET /api/health HTTP/1.1" 200 69 "-" "curl/8.17.0"
+[1] 127.0.0.1 - - [28/Nov/2025:08:22:30 +0000] "GET /api/products HTTP/1.1" 200 1664 "-" "curl/8.17.0"
+[1] 127.0.0.1 - - [28/Nov/2025:08:22:32 +0000] "GET /api/products HTTP/1.1" 200 1664 "-" "node"
+[0]  HEAD / 200 in 51ms
+[1] [INFO] 09:22:57 Reinitializing TS compilation
+[1] [INFO] 09:22:57 Restarting: /home/ra/Desktop/un533n/backend/tsconfig.json has been modified
+[1] 🚀 Server running on port 4000 (bound to 0.0.0.0)
+[1] 📊 Environment: development
+[1] 🌐 Detected LAN origins: http://172.20.10.3:3000, http://172.20.10.3:3001, http://172.20.10.3:3005
+[1] 🔒 CORS allowed origins: http://localhost:3000, http://localhost:3001, http://localhost:3005, https://un533nstu.shop, https://www.un533nstu.shop, http://172.20.10.3:3000, http://172.20.10.3:3001, http://172.20.10.3:3005
+[0]  ✓ Compiled in 1572ms (1389 modules)
+[1] 127.0.0.1 - - [28/Nov/2025:08:23:14 +0000] "GET /api/products HTTP/1.1" 200 1664 "-" "node"
+[0]  ✓ Compiled in 574ms (1389 modules)
+[1] 127.0.0.1 - - [28/Nov/2025:08:23:29 +0000] "GET /api/products HTTP/1.1" 200 1664 "-" "node"
+[1] [INFO] 09:24:01 Reinitializing TS compilation
+[1] [INFO] 09:24:01 Restarting: /home/ra/Desktop/un533n/backend/tsconfig.json has been modified
+[1] 🚀 Server running on port 4000 (bound to 0.0.0.0)
+[1] 📊 Environment: development
+[1] 🌐 Detected LAN origins: http://172.20.10.3:3000, http://172.20.10.3:3001, http://172.20.10.3:3005
+[1] 🔒 CORS allowed origins: http://localhost:3000, http://localhost:3001, http://localhost:3005, https://un533nstu.shop, https://www.un533nstu.shop, http://172.20.10.3:3000, http://172.20.10.3:3001, http://172.20.10.3:3005
+[0]  ✓ Compiled in 300ms (1389 modules)
+[1] 127.0.0.1 - - [28/Nov/2025:08:24:19 +0000] "GET /api/products HTTP/1.1" 200 1664 "-" "node"
+[0]  ✓ Compiled in 1065ms (1389 modules)
+[1] 127.0.0.1 - - [28/Nov/2025:08:24:43 +0000] "GET /api/products HTTP/1.1" 200 1664 "-" "node"

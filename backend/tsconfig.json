@@ -13,11 +13,6 @@
   "include": ["src/**/*.ts"],
   "exclude": [
     "node_modules",
-    "src/config/**",
-    "src/api/**",
-    "src/models/**",
-    "src/app.js",
-    "src/server.js",
-    "src/index.js"
+    "dist"
   ]
 }

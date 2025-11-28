@@ -8,6 +8,8 @@
   ],
   "scripts": {
     "dev": "concurrently \"npm run dev --workspace=frontend\" \"npm run dev --workspace=backend\"",
+    "dev:host": "concurrently \"npm run dev:host --workspace=frontend\" \"npm run dev --workspace=backend\"",
+    "dev:host:detach": "bash scripts/dev-host-detach.sh",
     "build": "npm run build --workspaces",
     "start": "concurrently \"npm run start --workspace=frontend\" \"npm run start --workspace=backend\""
   },
