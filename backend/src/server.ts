@@ -8,7 +8,6 @@ import ordersRouter from './routes/orders'
 import reviewsRouter from './routes/reviews'
 import { pool } from './db'
 import { ResultSetHeader } from 'mysql2'
-import { saveOrderInMemory } from './inmemoryOrders'
 import rateLimit from 'express-rate-limit'
 import { body, validationResult } from 'express-validator'
 import { errorHandler, notFoundHandler, asyncHandler } from './middleware/errorHandler'
@@ -110,7 +109,7 @@ app.get('/api/health', (req, res) => {
 // Products endpoint - read from DB
 app.get('/api/products', asyncHandler(async (req, res) => {
   const [rows] = await pool.query(`
-    SELECT id, sku, title, slug, description, price, image_url as imageUrl, color, category 
+    SELECT id, sku, title, slug, description, price, sale_price as salePrice, image_url as imageUrl, color, category 
     FROM products 
     ORDER BY id ASC 
     LIMIT 100
@@ -121,7 +120,7 @@ app.get('/api/products', asyncHandler(async (req, res) => {
 // Single product endpoint - read from DB
 app.get('/api/products/:slug', asyncHandler(async (req, res) => {
   const [rows] = await pool.query(`
-    SELECT id, sku, title, slug, description, price, image_url as imageUrl, color, category 
+    SELECT id, sku, title, slug, description, price, sale_price as salePrice, image_url as imageUrl, color, category 
     FROM products 
     WHERE slug = ? 
     LIMIT 1
@@ -143,6 +142,8 @@ app.post('/api/checkout/create-whatsapp',
   // validation + normalization for phone numbers
   body('items').isArray({ min: 1 }),
   body('items.*.qty').isInt({ min: 1 }),
+  // optional color for each item (e.g., T-shirt color)
+  body('items.*.color').optional().trim().isString().isLength({ max: 100 }).withMessage('Invalid color'),
   body('items.*.price').isFloat({ gt: 0 }),
   body('total').isFloat({ gt: 0 }),
   // accept optional phone with optional leading +, normalize to digits-only server-side
@@ -212,22 +213,19 @@ app.post('/api/checkout/create-whatsapp',
       }
 
       // Build WhatsApp message and URL regardless of DB result
-      const itemsList = items.map((item: { qty: number; title: string; price: number }) => `${item.qty}x ${item.title} @ $${item.price}`).join('\n')
-      const message = `New Order - ${ref}\n\nItems:\n${itemsList}\n\nTotal: $${total}`
+      const itemsList = items.map((item: { qty: number; title: string; price: number; color?: string }) => {
+        const colorSuffix = item.color ? ` (${item.color})` : ''
+        return `${item.qty}x ${item.title}${colorSuffix} @ ₦${item.price.toLocaleString('en-NG')}`
+      }).join('\n')
+
+      const customerLine = customer?.name ? `Customer: ${customer.name}\n` : ''
+      const phoneLine = normalizedCustomerPhone ? `Phone: +${normalizedCustomerPhone}\n` : ''
+
+      const message = `New Order - ${ref}\n\n${customerLine}${phoneLine}Items:\n${itemsList}\n\nTotal: ₦${total.toLocaleString('en-NG')}`
       const whatsappNumber = (process.env.WHATSAPP_NUMBER || '').replace(/\D/g, '')
       const base = /Mobi|Android/i.test((req.headers['user-agent'] || '')) ? 'https://api.whatsapp.com/send' : 'https://web.whatsapp.com/send'
       const phoneParam = whatsappNumber ? `phone=${whatsappNumber}&` : ''
       const url = `${base}?${phoneParam}text=${encodeURIComponent(message)}`
-
-      // If DB persistence didn't happen, save a dev fallback copy in-memory so GET can retrieve it during development
-      if (!persisted) {
-        try {
-          const saved = saveOrderInMemory({ reference: ref, total, items, customer_phone: customer?.phone || null })
-          orderId = saved.orderId ?? orderId
-        } catch (e) {
-          console.error('Failed to save in-memory order:', e)
-        }
-      }
 
       return res.json({ success: true, persisted, reference: ref, orderId, whatsappUrl: url })
     } catch (err) {

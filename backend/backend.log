@@ -1,7 +1,0 @@
-nohup: ignoring input
-🚀 Server running on port 4000
-📊 Environment: development
-🔒 CORS allowed origins: http://localhost:3000, http://localhost:3001, http://localhost:3005, https://un533nstu.shop, https://www.un533nstu.shop
-GET /api/products 200 26.478 ms - {}
-GET /api/products 200 2.647 ms - {}
-GET /api/products 200 2.137 ms - {}

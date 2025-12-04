@@ -1,1 +1,21 @@
+# Dependencies
 node_modules
+
+# Build outputs
+frontend/.next
+frontend/out
+backend/dist
+*.tsbuildinfo
+
+# Logs
+*.log
+*.pid
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# OS files
+.DS_Store
+Thumbs.db

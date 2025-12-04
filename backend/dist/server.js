@@ -12,7 +12,6 @@ const os_1 = __importDefault(require("os"));
 const orders_1 = __importDefault(require("./routes/orders"));
 const reviews_1 = __importDefault(require("./routes/reviews"));
 const db_1 = require("./db");
-const inmemoryOrders_1 = require("./inmemoryOrders");
 const express_rate_limit_1 = __importDefault(require("express-rate-limit"));
 const express_validator_1 = require("express-validator");
 const errorHandler_1 = require("./middleware/errorHandler");
@@ -104,7 +103,7 @@ app.get('/api/health', (req, res) => {
 // Products endpoint - read from DB
 app.get('/api/products', (0, errorHandler_1.asyncHandler)(async (req, res) => {
     const [rows] = await db_1.pool.query(`
-    SELECT id, sku, title, slug, description, price, image_url as imageUrl, color, category 
+    SELECT id, sku, title, slug, description, price, sale_price as salePrice, image_url as imageUrl, color, category 
     FROM products 
     ORDER BY id ASC 
     LIMIT 100
@@ -114,7 +113,7 @@ app.get('/api/products', (0, errorHandler_1.asyncHandler)(async (req, res) => {
 // Single product endpoint - read from DB
 app.get('/api/products/:slug', (0, errorHandler_1.asyncHandler)(async (req, res) => {
     const [rows] = await db_1.pool.query(`
-    SELECT id, sku, title, slug, description, price, image_url as imageUrl, color, category 
+    SELECT id, sku, title, slug, description, price, sale_price as salePrice, image_url as imageUrl, color, category 
     FROM products 
     WHERE slug = ? 
     LIMIT 1
@@ -188,22 +187,12 @@ app.post('/api/checkout/create-whatsapp', checkoutLimiter,
             }
         }
         // Build WhatsApp message and URL regardless of DB result
-        const itemsList = items.map((item) => `${item.qty}x ${item.title} @ $${item.price}`).join('\n');
-        const message = `New Order - ${ref}\n\nItems:\n${itemsList}\n\nTotal: $${total}`;
+        const itemsList = items.map((item) => `${item.qty}x ${item.title} @ ₦${item.price.toLocaleString('en-NG')}`).join('\n');
+        const message = `New Order - ${ref}\n\nItems:\n${itemsList}\n\nTotal: ₦${total.toLocaleString('en-NG')}`;
         const whatsappNumber = (process.env.WHATSAPP_NUMBER || '').replace(/\D/g, '');
         const base = /Mobi|Android/i.test((req.headers['user-agent'] || '')) ? 'https://api.whatsapp.com/send' : 'https://web.whatsapp.com/send';
         const phoneParam = whatsappNumber ? `phone=${whatsappNumber}&` : '';
         const url = `${base}?${phoneParam}text=${encodeURIComponent(message)}`;
-        // If DB persistence didn't happen, save a dev fallback copy in-memory so GET can retrieve it during development
-        if (!persisted) {
-            try {
-                const saved = (0, inmemoryOrders_1.saveOrderInMemory)({ reference: ref, total, items, customer_phone: customer?.phone || null });
-                orderId = saved.orderId ?? orderId;
-            }
-            catch (e) {
-                console.error('Failed to save in-memory order:', e);
-            }
-        }
         return res.json({ success: true, persisted, reference: ref, orderId, whatsappUrl: url });
     }
     catch (err) {

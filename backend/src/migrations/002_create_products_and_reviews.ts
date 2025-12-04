@@ -10,6 +10,7 @@ export async function up() {
       slug VARCHAR(255) NOT NULL UNIQUE,
       description TEXT,
       price DECIMAL(10,2) NOT NULL,
+      sale_price DECIMAL(10,2) DEFAULT NULL,
       image_url VARCHAR(512),
       color VARCHAR(50),
       category VARCHAR(100),
@@ -35,7 +36,7 @@ export async function up() {
     CREATE TABLE IF NOT EXISTS reviews (
       id INT PRIMARY KEY AUTO_INCREMENT,
       product_id INT NOT NULL,
-      user_id INT,
+      author_name VARCHAR(100) NOT NULL,
       rating TINYINT NOT NULL DEFAULT 5,
       comment TEXT,
       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,

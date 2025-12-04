@@ -14,7 +14,7 @@ export async function up() {
     { sku: 'UN-300', title: 'US Effort Sleeveless Tee', slug: 'US Effort Sleeveless Tee', price: 75000.0, description: 'Sleeveless tank with clean neckline and premium cotton.', image_url: '/images/products/IMG_0562.png', color: 'White', category: 'Tops' },
     { sku: 'UN-400', title: 'US Logo Tee', slug: 'US Logo Tee', price: 91000.0, description: 'Essential tee in heavyweight jersey.', image_url: '/images/products/IMG_0567.png', color: 'Black & White', category: 'T-Shirts' },
     { sku: 'UN-500', title: 'US PGNL Crop Top', slug: 'US PGNL Crop Top', price: 54000.0, description: 'Cropped top with tight rib and clean finish.', image_url: '/images/products/IMG_0568.png', color: 'Multi', category: 'Tops' },
-    { sku: 'UN-600', title: 'Combo', slug: 'combo', price: 150.0, description: 'Complete streetwear set with hoodie, pants, and essentials.', image_url: '/images/products/IMG_0564.png', color: 'Multi', category: 'Sets' }
+    { sku: 'UN-600', title: 'Combo', slug: 'combo', price: 269000.0, salePrice: 250000.0, description: 'Complete streetwear set with hoodie, pants, and essentials.', image_url: '/images/products/IMG_0564.png', color: 'Multi', category: 'Sets' }
   ]
 
   for (const p of products) {
