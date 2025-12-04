@@ -137,3 +137,49 @@
 [1] 127.0.0.1 - - [28/Nov/2025:08:24:19 +0000] "GET /api/products HTTP/1.1" 200 1664 "-" "node"
 [0]  ✓ Compiled in 1065ms (1389 modules)
 [1] 127.0.0.1 - - [28/Nov/2025:08:24:43 +0000] "GET /api/products HTTP/1.1" 200 1664 "-" "node"
+[0]  ○ Compiling /_not-found ...
+[0]  ✓ Compiled /_not-found in 586ms (1378 modules)
+[0]  GET /fonts/Technocra-Bold.woff 404 in 739ms
+[1] 127.0.0.1 - - [28/Nov/2025:08:27:27 +0000] "GET /api/products HTTP/1.1" 200 1664 "-" "node"
+[0]  GET /_next/static/css/app/layout.css?v=1764318447335 404 in 16ms
+[1] 127.0.0.1 - - [28/Nov/2025:08:33:28 +0000] "GET /api/products HTTP/1.1" 200 1664 "-" "node"
+[0]  GET / 200 in 134ms
+[0]  GET /_next/static/css/app/layout.css?v=1764318808282 404 in 13ms
+[0]  GET /_next/static/chunks/app/layout.js 404 in 93ms
+[0]  GET /_next/static/chunks/app-pages-internals.js 404 in 92ms
+[0]  GET /_next/static/chunks/app/page.js 404 in 85ms
+[0]  GET /_next/static/chunks/main-app.js?v=1764318808282 404 in 93ms
+[0]  ✓ Compiled /favicon.ico in 291ms (736 modules)
+[0]  GET /favicon.ico 200 in 433ms
+[1] 127.0.0.1 - - [28/Nov/2025:08:33:29 +0000] "GET /api/products HTTP/1.1" 200 1664 "-" "node"
+[0]  GET / 200 in 127ms
+[0]  GET /_next/static/css/app/layout.css?v=1764318809391 404 in 48ms
+[0]  GET /_next/static/chunks/main-app.js?v=1764318809391 404 in 53ms
+[0]  GET /_next/static/chunks/app/page.js 404 in 52ms
+[0]  GET /_next/static/chunks/app/layout.js 404 in 54ms
+[0]  GET /_next/static/chunks/app-pages-internals.js 404 in 55ms
+[0]  GET /favicon.ico 200 in 7ms
+[1] 127.0.0.1 - - [28/Nov/2025:08:33:30 +0000] "GET /api/products HTTP/1.1" 200 1664 "-" "node"
+[0]  GET / 200 in 40ms
+[0]  GET /_next/static/css/app/layout.css?v=1764318810056 404 in 18ms
+[0]  GET /_next/static/chunks/main-app.js?v=1764318810056 404 in 45ms
+[0]  GET /_next/static/chunks/app-pages-internals.js 404 in 46ms
+[0]  GET /_next/static/chunks/app/page.js 404 in 46ms
+[0]  GET /_next/static/chunks/app/layout.js 404 in 46ms
+[0]  GET /favicon.ico 200 in 18ms
+[1] 127.0.0.1 - - [28/Nov/2025:08:33:30 +0000] "GET /api/products HTTP/1.1" 200 1664 "-" "node"
+[0]  GET / 200 in 28ms
+[0]  GET /_next/static/css/app/layout.css?v=1764318810524 404 in 18ms
+[0]  GET /_next/static/chunks/app-pages-internals.js 404 in 57ms
+[0]  GET /_next/static/chunks/app/page.js 404 in 54ms
+[0]  GET /_next/static/chunks/app/layout.js 404 in 57ms
+[0]  GET /_next/static/chunks/main-app.js?v=1764318810524 404 in 55ms
+[0]  GET /favicon.ico 200 in 5ms
+[1] 127.0.0.1 - - [28/Nov/2025:08:33:33 +0000] "GET /api/products HTTP/1.1" 200 1664 "-" "node"
+[0]  GET / 200 in 42ms
+[0]  GET /_next/static/css/app/layout.css?v=1764318813234 404 in 20ms
+[0]  GET /_next/static/chunks/app-pages-internals.js 404 in 48ms
+[0]  GET /_next/static/chunks/app/layout.js 404 in 48ms
+[0]  GET /_next/static/chunks/main-app.js?v=1764318813234 404 in 46ms
+[0]  GET /_next/static/chunks/app/page.js 404 in 49ms
+[0]  GET /favicon.ico 200 in 8ms

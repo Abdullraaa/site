@@ -3,7 +3,7 @@ import mysql from 'mysql2/promise'
 import { pool } from '../db'
 import { up as up001 } from './001_create_orders'
 import { up as up002 } from './002_create_products_and_reviews'
-import { up as up003 } from './003_update_products_five_items'
+import { up as up003 } from './003_seed_curated_products'
 
 /**
  * Template tag function for running SQL queries
@@ -43,7 +43,7 @@ export async function runMigrations() {
   const migrations = [
     { name: '001_create_orders', up: up001 },
     { name: '002_create_products_and_reviews', up: up002 },
-    { name: '003_update_products_five_items', up: up003 }
+    { name: '003_seed_curated_products', up: up003 }
   ]
 
   // Run pending migrations
